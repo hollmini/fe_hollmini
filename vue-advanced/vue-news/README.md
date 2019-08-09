@@ -30,3 +30,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # 파일설명
 - vue.config.js : esLint 컨트롤 할때 필요한 파일
+
+# axios
+promise 기반으로 api를 제공한다.
