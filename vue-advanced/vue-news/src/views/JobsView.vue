@@ -14,13 +14,11 @@ export default {
     }
   },
   created() {
-    var vm =  this;
     fetchJobsList()
-      .then(function(response) {
-        console.log(response);
-        vm.jobs = response.data;
+      .then(response => {
+        this.jobs = response.data
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
   },
