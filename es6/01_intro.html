@@ -1,41 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Javascript 란?</title>
-<style type="text/css">
-	p {
-	font-family: 'helvetica neue', helvetica, sans-serif;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	text-align: center;
-	border: 2px solid rgba(0,0,200,0.6);
-	background: rgba(0,0,200,0.3);
-	color: rgba(0,0,200,0.6);
-	box-shadow: 1px 1px 2px rgba(0,0,200,0.4);
-	border-radius: 10px;
-	padding: 3px 10px;
-	display: inline-block;
-	cursor:pointer;
-	}
-</style>	
-</head>
-<body>
-<p>Player 1: Chris</p>
-<script type="text/Javascript">
-	// p태그를 para라는 변수로 지정한다.
-	const para = document.querySelector('p');
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Number guessing game</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
 
-	// para 클릭 이벤트 추가
-	para.addEventListener('click', updateName);
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
 
-	// 이벤트 함수 선언
-	function updateName() {
-		let name = prompt('Enter a new name');
-		para.textContent = 'Player 1: ' + name;
-	}
-</script>
-</body>
+      .lastResult {
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Number guessing game</h1>
+    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
+    <div class="form">
+      <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
+      <input type="submit" value="Submit guess" class="guessSubmit">
+    </div>
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+    <script>
+		// 수학적 알고리즘을 통해 1과 100사이의 수를 지정한다.
+		var randomNumber = Math.floor(Math.random() * 100) + 1;
+		console.log("랜덤값 : " + randomNumber);
+
+		// 태그를 지정 한다
+		var guessField = document.querySelector('.guessField'); // input 영역
+		var guessSubmit = document.querySelector('.guessSubmit'); // 전송 버튼
+		var lastResult  = document.querySelector('.lastResult'); // 마지막 적은 숫자
+
+		// 기타 값 지정
+		var guessCount = 0;
+
+		function setGameOver() {
+			resetButton = document.createElement('button');
+			document.body.appendChild(resetButton);
+			resetButton.textContent = 'Start new game';
+		}
+
+		function checkGuess() {
+			var userGuess = Number(guessField.value); // 입력한 숫자를 받아옴
+			
+			if(guessCount === 10)  {// 횟수 초과 후
+				lastResult.style.backgroundColor = 'red';
+				lastResult.textContent = 'Game over!!!!!!';
+			}else if (userGuess === randomNumber) { // 횟수 초과 전 맞을 때 !
+				lastResult.style.backgroundColor = 'green';
+				lastResult.textContent = 'Game success☆★';
+				setGameOver();
+			}else { // 횟수 초과 전
+				guessCount += 1;
+				console.log("입력 숫자 : " + userGuess); // 입력한 숫자 표시
+				console.log("클릭 횟수 : " + guessCount); // 클릭 횟수 표시
+				lastResult.textContent = 'Game ing';
+			}
+		}
+		
+
+		guessSubmit.addEventListener('click', checkGuess);
+
+
+
+    </script>
+  </body>
 </html>
