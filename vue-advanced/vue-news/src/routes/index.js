@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 
 export const router = new VueRouter({
 	mode: 'history', // url hash값 제거
-  routes: [
+    routes: [
 		{
 				path: '/',
 				redirect: '/news',
