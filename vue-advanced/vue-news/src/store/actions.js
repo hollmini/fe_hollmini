@@ -1,4 +1,10 @@
-import { fetchNewsList, fetchJobsList, fetchAskList } from "../api/index.js";
+import { 
+  fetchNewsList, 
+  fetchJobsList, 
+  fetchAskList, 
+  fetchUserInfo,
+  fetchAskItem,
+ } from "../api/index.js";
 
 export default {
   FETCH_NEWS(context) {  
@@ -8,7 +14,7 @@ export default {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   },
   FETCH_JOBS({ commit }) { 
     fetchJobsList()
@@ -17,15 +23,36 @@ export default {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   },
-  FETCH_ASK({ commit })  {
+  FETCH_ASK({ commit }) {
     fetchAskList()
       .then(({ data }) => {
         commit('SET_ASK', data);
       })
       .catch(error => {
         console.log(error);
+      });
+  },
+  FETCH_USER({ commit }, name) {
+    fetchUserInfo(name)
+      .then(({ data }) => {
+        // console.log(response.data);
+        commit('SET_USER', data)
       })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  FETCH_ASK_ITEM({ commit }, askId) {
+    fetchAskItem(askId)
+      .then(({ data }) => {
+        // console.log(response.data);
+        commit('SET_ASK_ITEM', data)
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
 }
