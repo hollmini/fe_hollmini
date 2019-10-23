@@ -1,11 +1,16 @@
 <template>
   <div>
-    Ask
+    <list-item></list-item>
   </div>
 </template>
 
 <script>
+import ListItem from "@/components/ListItem.vue";
+
 export default {
+  components: {
+    ListItem,
+  },
   head: {
     title: 'Ask',
     meta: [
