@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-item></list-item>
+    JOBS
   </div>
 </template>
 

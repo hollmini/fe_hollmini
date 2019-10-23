@@ -2,8 +2,8 @@
   <div>
     <ul class="lst_wrap">
       <li 
-        v-for="item in items" 
-        v-bind:key="item"
+        v-for="(item, index) in items" 
+        v-bind:key="index"
         class="post">
         <!-- 포인트 영역 -->
         <div class="points">
@@ -15,13 +15,13 @@
             <a :href="item.url" class="tit" target="_blank">{{ item.title }}</a>
           </template>
           <template v-else>
-            <router-link :to="`/item/${item.id}`" class="tit">{{ item.title }}</router-link>
+            <NLink :to="`/item/${item.id}`" class="tit">{{ item.title }}</NLink>
           </template>
           <!-- // 타이틀 영역 -->
           <small class="link_txt">
             {{item.time_ago}} by 
-            <router-link v-if="item.user" :to="`/user/${item.user}`">{{item.user}}</router-link>
-            <a v-else :href="item.domain">{{ item.domain }}</a>
+            <NLink v-if="item.user" :to="`/user/${item.user}`">{{item.user}}</NLink>
+            <!-- <a v-else :href="item.domain">{{ item.domain }}</a> -->
           </small>
         </div>
       </li>
